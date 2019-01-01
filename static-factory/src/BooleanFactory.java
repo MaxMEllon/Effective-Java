@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.rmi.UnexpectedException;
 import java.util.*;
 
@@ -21,4 +22,19 @@ public class BooleanFactory /* implements IFactory */ {
         Arrays.asList(args).forEach((itr) -> set.add(itr));
         return set;
     }
+
+    public static Boolean valueOf(Boolean ...args) {
+       return BooleanFactory.valueOf(args);
+    }
+
+    public static Class<Boolean> newType() {
+        return Boolean.class;
+    }
+
+    /* TODO
+    public static Boolean newInstance(Boolean obj) {
+        // clone or re create instance
+    }
+
+    */
 }
