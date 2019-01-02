@@ -1,4 +1,3 @@
-import java.rmi.UnexpectedException;
 import java.util.Set;
 
 public class Main {
@@ -6,7 +5,7 @@ public class Main {
         Boolean b = null;
         try {
             b = BooleanFactory.from("true");
-        } catch (UnexpectedException e) {
+        } catch (AssertionError e) {
             e.printStackTrace();
         }
         Set<Boolean> set = BooleanFactory.of(Boolean.True, Boolean.False);

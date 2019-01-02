@@ -1,10 +1,8 @@
-import java.lang.reflect.Array;
-import java.rmi.UnexpectedException;
 import java.util.*;
 
 public class BooleanFactory /* implements IFactory */ {
     // なにかしろの文字列をパースを行うイメージ
-    public static Boolean from(String arg) throws UnexpectedException {
+    public static Boolean from(String arg) throws AssertionError {
         switch (arg) {
             case "true":
             case "True":
@@ -13,14 +11,22 @@ public class BooleanFactory /* implements IFactory */ {
             case "False":
                 return Boolean.False;
             default:
-                throw new UnexpectedException("unexpected arguments");
+                throw new AssertionError("unexpected arguments");
         }
     }
 
     public static Set<Boolean> of(Boolean ...args) {
-        Set<Boolean> set = EnumSet.noneOf(Boolean.class);
-        Arrays.asList(args).forEach((itr) -> set.add(itr));
-        return set;
+        return Arrays.asList(args)
+                .stream()
+                .reduce(
+                    EnumSet.noneOf(Boolean.class),
+                    (acc, itr) -> {
+                        acc.add(itr);
+                        return acc;
+                    },
+                    // parallel not support.
+                    (prev, next) -> next
+                );
     }
 
     public static Boolean valueOf(Boolean ...args) {
