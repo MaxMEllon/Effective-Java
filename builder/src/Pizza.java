@@ -8,7 +8,7 @@ public class Pizza {
     private final Size size;
     private final Sauce sauce;
 
-    private Pizza(Builder builder) {
+    private Pizza(final Builder builder) {
         this.size = builder.size;
         this.sauce = builder.sauce;
     }
@@ -26,7 +26,7 @@ public class Pizza {
            return this;
         }
 
-        public Builder setSauce(Sauce sauce) {
+        public Builder setSauce(final Sauce sauce) {
             this.sauce = sauce;
             return this;
         }
